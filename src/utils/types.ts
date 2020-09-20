@@ -1,5 +1,7 @@
 export interface SearchRepositoriesState {
+  searchTerm: string;
   repositories: Repository[];
+  repositoryByOwner: any;
   isLoading: boolean;
   error: string;
 }
