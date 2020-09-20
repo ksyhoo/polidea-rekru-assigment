@@ -7,12 +7,12 @@ interface Props {
 }
 
 const Repo: React.SFC<Props> = ({
-  repo: { id, name, owner, numberOfStars, primaryLanguage },
+  repo: { name, owner, numberOfStars, primaryLanguage },
 }: Props) => {
   return (
     <Wrapper
       to={{
-        pathname: `/repository:${id}`,
+        pathname: `/repository/${name}/${owner.name}`,
       }}
     >
       <Heading fontSize={18} mb={12}>
