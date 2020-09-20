@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 export const useScroll = (): number => {
   const [scrollHeight, setScrollHeight] = React.useState(0);
@@ -30,3 +30,15 @@ export const useDebounce = (
       clearTimeout(handler);
     };
   }, dependencies);
+
+export const useDidMountEffect = (
+  callback: () => void,
+  dependencies: any[]
+): void => {
+  const didMount = useRef(false);
+
+  useEffect(() => {
+    if (didMount.current) callback();
+    else didMount.current = true;
+  }, dependencies);
+};
