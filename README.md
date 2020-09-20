@@ -16,3 +16,4 @@ Application is written in simple and naive. Based on project size / complexity /
 3. Infinite Scroll - finish
 4. Tests
 5. Normalize response, store data in objects, use library like `https://github.com/paularmstrong/normalizr`
+6. check if item in state already on details page
