@@ -10,8 +10,8 @@ export const Routes: React.SFC = () => (
   <BrowserRouter>
     <React.Suspense fallback={<p>Loading</p>}>
       <Switch>
-        <Route path="/" component={Router.Landing} />
-        <Route path="/repository" component={Router.Repository} />
+        <Route exact path="/" component={Router.Landing} />
+        <Route path="/repository:id" component={Router.Repository} />
       </Switch>
     </React.Suspense>
   </BrowserRouter>

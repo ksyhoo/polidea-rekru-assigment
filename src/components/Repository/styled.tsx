@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const StyledText = styled.p<{ fontSize: number; mb?: number }>`
   font-size: ${(p) => `${p.fontSize}px`};
@@ -11,7 +12,7 @@ export const StyledText = styled.p<{ fontSize: number; mb?: number }>`
   }
 `;
 
-export const Wrapper = styled.div`
+export const Wrapper = styled(Link)`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -19,6 +20,7 @@ export const Wrapper = styled.div`
   flex-direction: column;
   box-shadow: 29px 28px 195px -53px rgba(0, 0, 0, 1);
   padding: ${(p) => `${p.theme.spacing.large}`};
+  text-decoration: none;
 
   transition: all 0.2s ease-in-out;
 
