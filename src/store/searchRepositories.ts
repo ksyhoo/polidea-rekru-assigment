@@ -1,11 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { SearchRepositoriesState } from 'utils/types';
+import { SearchRepositoriesState, Repository } from 'utils/types';
 import { AppThunk } from 'store';
 import { restWithAuth } from 'utils/octo-client';
 import { normalizeResponse } from 'utils/helpers';
 
 const initialState: SearchRepositoriesState = {
+  searchTerm: '',
   repositories: [],
+  repositoryByOwner: {},
   isLoading: false,
   error: '',
 };
@@ -14,8 +16,14 @@ export const searchRepositoriesSlice = createSlice({
   name: 'searchRepositories',
   initialState,
   reducers: {
-    getRepositoriesSuccess: (state, { payload }: PayloadAction<any>) => {
+    getRepositoryListSuccess: (
+      state,
+      { payload }: PayloadAction<Repository[]>
+    ) => {
       state.repositories = payload;
+    },
+    getRepositorySuccess: (state, { payload }: PayloadAction<any>) => {
+      state.repositoryByOwner = payload;
     },
     getRepositoriesLoading: (state, { payload }: PayloadAction<boolean>) => {
       state.isLoading = payload;
@@ -23,12 +31,16 @@ export const searchRepositoriesSlice = createSlice({
     getRepositoriesError: (state, { payload }: PayloadAction<string>) => {
       state.error = payload;
     },
+    setSearchTerm: (state, { payload }: PayloadAction<string>) => {
+      state.searchTerm = payload;
+    },
   },
 });
 
-export const fetchRepositories = (query: string, page = 1): AppThunk => async (
-  dispatch
-) => {
+export const fetchRepositoriesList = (
+  query: string,
+  page = 1
+): AppThunk => async (dispatch) => {
   try {
     dispatch(getRepositoriesError(''));
     if (query) {
@@ -39,9 +51,9 @@ export const fetchRepositories = (query: string, page = 1): AppThunk => async (
         page: page,
       });
       if (data.total_count) {
-        dispatch(getRepositoriesSuccess(normalizeResponse(data.items)));
+        dispatch(getRepositoryListSuccess(normalizeResponse(data.items)));
       } else {
-        dispatch(getRepositoriesSuccess([]));
+        dispatch(getRepositoryListSuccess([]));
         dispatch(getRepositoriesError('No Records found for search query!'));
       }
     }
@@ -52,9 +64,28 @@ export const fetchRepositories = (query: string, page = 1): AppThunk => async (
   dispatch(getRepositoriesLoading(false));
 };
 
+export const fetchRepository = (
+  repo: string,
+  owner: string
+): AppThunk => async (dispatch) => {
+  try {
+    //FIXME: check if  repo is in repositories list to save on one api call ;)
+    const { data } = await restWithAuth.repos.get({
+      repo,
+      owner,
+    });
+
+    dispatch(getRepositorySuccess(data));
+  } catch (err) {
+    console.warn(err);
+  }
+};
+
 const { actions } = searchRepositoriesSlice;
 export const {
-  getRepositoriesSuccess,
+  getRepositorySuccess,
+  getRepositoryListSuccess,
   getRepositoriesLoading,
   getRepositoriesError,
+  setSearchTerm,
 } = actions;
