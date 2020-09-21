@@ -69,6 +69,8 @@ export const fetchRepository = (
   owner: string
 ): AppThunk => async (dispatch) => {
   try {
+    dispatch(getRepositoriesLoading(true));
+
     //FIXME: check if  repo is in repositories list to save on one api call ;)
     const { data } = await restWithAuth.repos.get({
       repo,
@@ -78,7 +80,9 @@ export const fetchRepository = (
     dispatch(getRepositorySuccess(data));
   } catch (err) {
     console.warn(err);
+    dispatch(getRepositoriesError(err.toString()));
   }
+  dispatch(getRepositoriesLoading(false));
 };
 
 const { actions } = searchRepositoriesSlice;

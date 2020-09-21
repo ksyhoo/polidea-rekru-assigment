@@ -6,13 +6,17 @@ import { SearchRepositoriesState, Repository } from 'utils/types';
 import Repo from 'components/Repository';
 import InfinityScroll from 'components/InfinityScroll';
 import { useDebouncedCallback } from 'use-debounce/lib';
-import { fetchRepositoriesList } from 'store/searchRepositories';
+import {
+  fetchRepositoriesList,
+  getRepositorySuccess,
+} from 'store/searchRepositories';
 import { useDidMountEffect } from 'utils/hooks';
 import WithLoading from 'components/Hoc/WithLoading';
 
 interface Props {
   setLoading: (value: boolean) => void;
 }
+
 const Results: React.SFC<Props> = ({ setLoading }: Props) => {
   const dispatch = useDispatch();
   const {
@@ -31,7 +35,8 @@ const Results: React.SFC<Props> = ({ setLoading }: Props) => {
 
   useEffect(() => {
     setLoading(isLoading);
-  }, [isLoading]);
+    dispatch(getRepositorySuccess({}));
+  }, [setLoading, isLoading]);
 
   useDidMountEffect(() => {
     debounced.callback(searchTerm);

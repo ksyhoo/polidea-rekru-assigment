@@ -1,13 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { RootState } from 'store';
 import { useSelector } from 'react-redux';
+import WithLoading from 'components/Hoc/WithLoading';
 
-const RepositoryDetailsPanel: React.SFC = () => {
+interface Props {
+  setLoading: (value: boolean) => void;
+}
+
+const RepositoryDetailsPanel: React.SFC<Props> = ({ setLoading }: Props) => {
   const { repositoryByOwner, isLoading } = useSelector(
     (state: RootState) => state.searchRepositories
   );
 
-  return <p>{repositoryByOwner.id}</p>;
+  useEffect(() => {
+    setLoading(isLoading);
+  }, [setLoading, isLoading]);
+
+  return <p>{repositoryByOwner && repositoryByOwner.id}</p>;
 };
 
-export default RepositoryDetailsPanel;
+export default WithLoading(RepositoryDetailsPanel);
