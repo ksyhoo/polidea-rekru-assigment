@@ -4,6 +4,8 @@ import { AppThunk } from 'store';
 import { restWithAuth } from 'utils/octo-client';
 import { normalizeResponse } from 'utils/helpers';
 
+// TODO: move searchTerm and repositoryByOwner to it's own state slices, redux toolkit also has new api for api thunks and dev tool finally
+
 const initialState: SearchRepositoriesState = {
   searchTerm: '',
   repositories: [],
@@ -93,3 +95,5 @@ export const {
   getRepositoriesError,
   setSearchTerm,
 } = actions;
+
+export default searchRepositoriesSlice.reducer;
