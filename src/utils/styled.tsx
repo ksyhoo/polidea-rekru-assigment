@@ -10,4 +10,10 @@ export const GlobalStyles = createGlobalStyle`
   }
 `;
 
-export const Container = styled.main``;
+export const Container = styled.main`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+`;

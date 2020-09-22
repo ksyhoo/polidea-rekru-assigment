@@ -1,5 +1,5 @@
 import React from 'react';
-import { Wrapper, StyledText, Star, Heading } from './styled';
+import { RepositoryContainer, StyledText, Star, Heading } from './styled';
 import { Repository } from 'utils/types';
 
 interface Props {
@@ -10,7 +10,7 @@ const Repo: React.SFC<Props> = ({
   repo: { name, owner, numberOfStars, primaryLanguage },
 }: Props) => {
   return (
-    <Wrapper
+    <RepositoryContainer
       to={{
         pathname: `/repository/${name}/${owner.name}`,
       }}
@@ -25,7 +25,7 @@ const Repo: React.SFC<Props> = ({
       <Star>
         <StyledText fontSize={6}>{numberOfStars}</StyledText>
       </Star>
-    </Wrapper>
+    </RepositoryContainer>
   );
 };
 

@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 
-export const Wrapper = styled.section`
+export const ResultsContainer = styled.section`
   display: flex;
   align-items: center;
   flex-direction: column;
   background: ${(p) => p.theme.colors.gray};
   height: 100%;
   padding: ${(p) => p.theme.spacing.large};
+  margin-top: ${(p) => p.theme.spacing.xxlarge};
 `;
 
 export const RepositoriesContainer = styled.div`

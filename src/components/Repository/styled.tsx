@@ -12,7 +12,7 @@ export const StyledText = styled.p<{ fontSize: number; mb?: number }>`
   }
 `;
 
-export const Wrapper = styled(Link)`
+export const RepositoryContainer = styled(Link)`
   display: flex;
   align-items: center;
   justify-content: center;

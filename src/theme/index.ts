@@ -12,6 +12,8 @@ export interface Theme {
     small: string;
     medium: string;
     large: string;
+    xlarge: string;
+    xxlarge: string;
   };
   font: string;
 }
@@ -30,6 +32,8 @@ const theme: Theme = {
     small: '8px',
     medium: '16px',
     large: '32px',
+    xlarge: '64px',
+    xxlarge: '128px',
   },
   font: 'Poppins',
 };

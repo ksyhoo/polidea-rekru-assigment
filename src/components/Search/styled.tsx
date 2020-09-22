@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
 export const Input = styled.input`
-  padding: ${(p) => `${p.theme.spacing.small}`};
-  width: 100%;
-  height: 100%;
+  margin: ${(p) => `${p.theme.spacing.large}`} auto;
+  height: 50px;
+  width: 50%;
   outline: none;
   text-align: center;
   border: none;
@@ -23,10 +23,4 @@ export const Input = styled.input`
     box-shadow: 18px 17px 16px -10px rgba(0, 0, 0, 1);
     transform: scale(1.1);
   }
-`;
-
-export const Wrapper = styled.div`
-  margin: ${(p) => `${p.theme.spacing.large}`} auto;
-  height: 50px;
-  width: 50%;
 `;

@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
 import ClipLoader from 'react-spinners/ClipLoader';
-import { Wrapper } from './styled';
+import { WithLoadingContainer } from './styled';
 
 const WithLoading = (Component: any) => {
   return function WrappedWithLoading(props: any): any {
     const [isLoading, setIsLoading] = useState(false);
     const setLoading = (isComponentLoading: boolean) =>
       setIsLoading(isComponentLoading);
+
     return (
       <>
         {isLoading && (
-          <Wrapper>
+          <WithLoadingContainer>
             <ClipLoader size={150} loading={props.isLoading} />
-          </Wrapper>
+          </WithLoadingContainer>
         )}
         <Component {...props} setLoading={setLoading} />
       </>

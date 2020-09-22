@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Wrapper, StyledButton } from './styled';
+import { ResultsContainer, StyledButton } from './styled';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from 'store';
 import { SearchRepositoriesState, Repository } from 'utils/types';
@@ -27,7 +27,6 @@ const Results: React.SFC<Props> = ({ setLoading }: Props) => {
   }: SearchRepositoriesState = useSelector(
     (rootState: RootState) => rootState.searchRepositories
   );
-  const showResults = !!repositories.length && !isLoading;
   const debounced = useDebouncedCallback((query: string) => {
     dispatch(fetchRepositoriesList(query));
   }, 300);
@@ -48,13 +47,12 @@ const Results: React.SFC<Props> = ({ setLoading }: Props) => {
   //     dispatch(fetchRepositoriesList('asd', 2));
   //   }, [repositories]);
 
-  if (error) return <Wrapper>There was a problem: {error}</Wrapper>;
+  if (error)
+    return <ResultsContainer>There was a problem: {error}</ResultsContainer>;
 
   return (
-    <Wrapper>
-      {showResults && (
-        <StyledButton onClick={handleClick}>Refresh results</StyledButton>
-      )}
+    <ResultsContainer>
+      <StyledButton onClick={handleClick}>Refresh results</StyledButton>
       <InfinityScroll
         onEnd={() => null}
         data={repositories}
@@ -62,7 +60,7 @@ const Results: React.SFC<Props> = ({ setLoading }: Props) => {
           <Repo repo={data} key={key} />
         )}
       />
-    </Wrapper>
+    </ResultsContainer>
   );
 };
 export default WithLoading(Results);
