@@ -17,7 +17,7 @@ interface Props {
   setLoading: (value: boolean) => void;
 }
 
-const Results: React.SFC<Props> = ({ setLoading }: Props) => {
+const RepositorySearchResults: React.SFC<Props> = ({ setLoading }: Props) => {
   const dispatch = useDispatch();
   const {
     isLoading,
@@ -63,4 +63,4 @@ const Results: React.SFC<Props> = ({ setLoading }: Props) => {
     </ResultsContainer>
   );
 };
-export default WithLoading(Results);
+export default WithLoading(RepositorySearchResults);
