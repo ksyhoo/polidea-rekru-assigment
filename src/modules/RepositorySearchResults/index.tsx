@@ -42,7 +42,7 @@ const RepositorySearchResults: React.SFC<Props> = ({ setLoading }: Props) => {
 
   const handleClick = () => dispatch(fetchRepositoriesList(searchTerm));
 
-  // FIXME: Fix infinite scroll
+  // FIXME: Fix and finish infinite scroll
   //   const loadMore = useCallback(() => {
   //     dispatch(fetchRepositoriesList('asd', 2));
   //   }, [repositories]);
