@@ -28,7 +28,6 @@ const Results: React.SFC<Props> = ({ setLoading }: Props) => {
     (rootState: RootState) => rootState.searchRepositories
   );
   const showResults = !!repositories.length && !isLoading;
-
   const debounced = useDebouncedCallback((query: string) => {
     dispatch(fetchRepositoriesList(query));
   }, 300);
@@ -36,7 +35,7 @@ const Results: React.SFC<Props> = ({ setLoading }: Props) => {
   useEffect(() => {
     setLoading(isLoading);
     dispatch(getRepositorySuccess({}));
-  }, [setLoading, isLoading]);
+  }, [setLoading, isLoading, dispatch]);
 
   useDidMountEffect(() => {
     debounced.callback(searchTerm);
