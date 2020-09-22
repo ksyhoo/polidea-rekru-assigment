@@ -1,9 +1,16 @@
-import React from 'react';
-import { render } from '@testing-library/react';
-import App from './App';
+import { create } from 'react-test-renderer';
+import React, { Suspense } from 'react';
+import App from 'App';
 
-test('renders learn react link', () => {
-  const { getByText } = render(<App />);
-  const linkElement = getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+describe('AppComponent', () => {
+  it('rendered lazily', async () => {
+    const root = create(
+      <Suspense fallback={<div>loading...</div>}>
+        <App />
+      </Suspense>
+    );
+
+    await App;
+    expect(root).toMatchSnapshot();
+  });
 });
