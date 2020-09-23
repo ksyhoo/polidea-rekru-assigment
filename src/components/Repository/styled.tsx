@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import star from 'assets/star.png';
 
 export const StyledText = styled.p<{ fontSize: number; mb?: number }>`
   font-size: ${(p) => `${p.fontSize}px`};
@@ -29,7 +30,7 @@ export const RepositoryContainer = styled(Link)`
 `;
 
 export const Star = styled.div`
-  background: url('star.png') no-repeat center center;
+  background: url(${star}) no-repeat center center;
   background-size: contain;
   height: 70px;
   width: 70px;
