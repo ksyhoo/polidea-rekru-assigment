@@ -13,6 +13,7 @@ const Search: React.FC = () => {
       onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
         handleChange(e.target.value)
       }
+      //TODO: add value for controlled component
     />
   );
 };

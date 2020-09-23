@@ -5,7 +5,8 @@ Please provide your personal Github access token in .env file under `REACT_APP_P
 
 yarn install
 yarn start
-
+yarn test 
+ 
 
 ### `TODO`
 
