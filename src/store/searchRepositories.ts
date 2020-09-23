@@ -3,6 +3,7 @@ import { SearchRepositoriesState, Repository } from 'utils/types';
 import { AppThunk } from 'store';
 import { restWithAuth } from 'utils/octo-client';
 import { normalizeResponse } from 'utils/helpers';
+import camelcaseKeys from 'camelcase-keys';
 
 // TODO: move searchTerm and repositoryByOwner to it's own state slices,
 // redux toolkit also has new api for api thunks and dev tools finally
@@ -26,7 +27,7 @@ export const searchRepositoriesSlice = createSlice({
       state.repositories = payload;
     },
     getRepositorySuccess: (state, { payload }: PayloadAction<any>) => {
-      state.repositoryByOwner = payload;
+      state.repositoryByOwner = camelcaseKeys(payload);
     },
     getRepositoriesLoading: (state, { payload }: PayloadAction<boolean>) => {
       state.isLoading = payload;
@@ -46,6 +47,10 @@ export const fetchRepositoriesList = (
 ): AppThunk => async (dispatch) => {
   try {
     dispatch(getRepositoriesError(''));
+
+    if (!query) {
+      dispatch(getRepositoryListSuccess([]));
+    }
     if (query) {
       dispatch(getRepositoriesLoading(true));
       const { data } = await restWithAuth.search.repos({
@@ -72,9 +77,9 @@ export const fetchRepository = (
   owner: string
 ): AppThunk => async (dispatch) => {
   try {
+    dispatch(getRepositoriesError(''));
     dispatch(getRepositoriesLoading(true));
 
-    //FIXME: check if  repo is in repositories list to save on one api call ;)
     const { data } = await restWithAuth.repos.get({
       repo,
       owner,
