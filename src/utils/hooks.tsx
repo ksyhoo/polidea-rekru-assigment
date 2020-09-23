@@ -29,7 +29,7 @@ export const useDebounce = (
     return () => {
       clearTimeout(handler);
     };
-  }, dependencies);
+  }, [dependencies, timeout, callback]);
 
 export const useDidMountEffect = (
   callback: () => void,
