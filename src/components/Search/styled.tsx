@@ -8,7 +8,7 @@ export const Input = styled.input`
   text-align: center;
   border: none;
   border-radius: ${(p) => `${p.theme.borderRadius}`};
-  box-shadow: 29px 28px 84px -9px rgba(173, 173, 173, 1);
+  box-shadow: 16px 24px 24px 0px rgba(173, 173, 173, 1);
   font-family: ${(p) => p.theme.font};
   font-size: 16px;
   color: ${(p) => p.theme.colors.black};

@@ -57,7 +57,7 @@ exports[`RepoComponent render Repo component 1`] = `
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  box-shadow: 29px 28px 195px -53px rgba(0,0,0,1);
+  box-shadow: 8px 8px 16px rgba(0,0,0,1);
   padding: 32px;
   -webkit-text-decoration: none;
   text-decoration: none;
@@ -94,7 +94,7 @@ exports[`RepoComponent render Repo component 1`] = `
 
 <a
   className="c0"
-  href="/repository/repo/ owner"
+  href="/repository/repo/owner"
   onClick={[Function]}
 >
   <p
@@ -107,7 +107,7 @@ exports[`RepoComponent render Repo component 1`] = `
     className="c1 c4"
     fontSize={12}
   >
-     owner
+    owner
      / 
     <span>
       any

@@ -18,10 +18,9 @@ export const RepositoryContainer = styled(Link)`
   justify-content: center;
   align-items: flex-start;
   flex-direction: column;
-  box-shadow: 29px 28px 195px -53px rgba(0, 0, 0, 1);
+  box-shadow: 8px 8px 16px rgba(0, 0, 0, 1);
   padding: ${(p) => `${p.theme.spacing.large}`};
   text-decoration: none;
-
   transition: all 0.2s ease-in-out;
 
   &:hover {

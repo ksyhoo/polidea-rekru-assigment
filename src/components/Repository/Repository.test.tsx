@@ -7,10 +7,11 @@ import theme from 'theme';
 import { BrowserRouter } from 'react-router-dom';
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
+import { StyledText } from './styled';
 
 const repo = {
   name: 'repo',
-  owner: { name: ' owner', type: 'any' },
+  owner: { name: 'owner', type: 'any' },
   numberOfStars: 22,
   primaryLanguage: 'Ponglish',
   id: 1,
@@ -32,9 +33,28 @@ describe('RepoComponent', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  test('shows the children when the checkbox is checked', () => {
-    const testMessage = repo.name;
+  test('render Repo component', () => {
     render(<Component />);
-    expect(screen.getByText(testMessage)).toBeInTheDocument();
+    expect(screen.getByText(repo.name)).toBeInTheDocument();
+    expect(screen.getByText(`${repo.numberOfStars}`)).toBeInTheDocument();
+    expect(screen.getByText(`${repo.owner.name} /`)).toBeInTheDocument();
+    expect(screen.getByText(repo.owner.type)).toBeInTheDocument();
+    expect(screen.getByText(repo.primaryLanguage)).toBeInTheDocument();
+  });
+
+  test('it applies styles according to passed props', () => {
+    const wrapper = create(
+      <ThemeProvider theme={theme}>
+        <StyledText fontSize={12} mb={4} />
+      </ThemeProvider>
+    ).toJSON();
+    expect(wrapper).toHaveStyleRule(
+      'font-size',
+      expect.stringContaining('12px')
+    );
+    expect(wrapper).toHaveStyleRule(
+      'margin-bottom',
+      expect.stringContaining('4px')
+    );
   });
 });
