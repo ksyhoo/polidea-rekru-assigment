@@ -13,9 +13,9 @@ import {
 import { useDidMountEffect } from 'utils/hooks';
 import WithLoading from 'components/Hoc/WithLoading';
 
-interface Props {
+type Props = {
   setLoading: (value: boolean) => void;
-}
+};
 
 const RepositorySearchResults: React.SFC<Props> = ({ setLoading }: Props) => {
   const dispatch = useDispatch();
@@ -41,6 +41,7 @@ const RepositorySearchResults: React.SFC<Props> = ({ setLoading }: Props) => {
   }, [searchTerm, debounced]);
 
   const handleClick = () => dispatch(fetchRepositoriesList(searchTerm));
+  const grayOut = !!repositories.length && isLoading;
 
   // FIXME: Fix and finish infinite scroll
   //   const loadMore = useCallback(() => {
@@ -51,8 +52,10 @@ const RepositorySearchResults: React.SFC<Props> = ({ setLoading }: Props) => {
     return <ResultsContainer>There was a problem: {error}</ResultsContainer>;
 
   return (
-    <ResultsContainer>
-      <StyledButton onClick={handleClick}>Refresh results</StyledButton>
+    <ResultsContainer grayOut={grayOut}>
+      {!!repositories.length && (
+        <StyledButton onClick={handleClick}>Refresh results</StyledButton>
+      )}
       <InfinityScroll
         onEnd={() => null}
         data={repositories}

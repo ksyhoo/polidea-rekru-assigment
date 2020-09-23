@@ -3,12 +3,12 @@ import { ListContainer } from './styled';
 import { useScroll, useDebounce } from 'utils/hooks';
 import { Repository } from 'utils/types';
 
-interface Props {
+type Props = {
   data: Repository[];
   onEnd: () => void;
   isLoading?: boolean;
   renderItem: (data: Repository, key: number) => React.ReactNode;
-}
+};
 
 const InfinityScroll: React.FC<Props> = ({
   data = [],

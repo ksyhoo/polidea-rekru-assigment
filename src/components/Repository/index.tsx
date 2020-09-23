@@ -2,9 +2,9 @@ import React from 'react';
 import { RepositoryContainer, StyledText, Star, Heading } from './styled';
 import { Repository } from 'utils/types';
 
-interface Props {
+type Props = {
   repo: Repository;
-}
+};
 
 const Repo: React.SFC<Props> = ({
   repo: { name, owner, numberOfStars, primaryLanguage },
