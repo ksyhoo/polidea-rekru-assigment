@@ -26,5 +26,5 @@ it('set loading state to false', () => {
     type: getRepositoriesLoading.type,
   });
 
-  //TODO: test async action and fetch
+  //TODO: test async octokit  action and api fetch
 });
